@@ -1,5 +1,5 @@
 //
-//  EWEMainTableViewController.h
+//  EWEMainViewController.h
 //  TheFunSpot
 //
 //  Created by Kervins Valcourt on 9/3/14.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface EWEMainTableViewController : UITableViewController
+@interface EWEMainViewController : UIViewController
 
 @end

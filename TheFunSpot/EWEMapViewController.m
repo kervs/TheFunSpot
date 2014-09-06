@@ -2,14 +2,18 @@
 //  EWEMapViewController.m
 //  TheFunSpot
 //
-//  Created by Kervins Valcourt on 9/3/14.
+//  Created by Kervins Valcourt on 9/4/14.
 //  Copyright (c) 2014 EastoftheWestEnd. All rights reserved.
 //
 
 #import "EWEMapViewController.h"
 #import <MapKit/MapKit.h>
+@interface EWEMapViewController () <MKMapViewDelegate>
+@property (nonatomic, strong)UINavigationBar *navBar;
+@property (nonatomic, strong)MKMapView *mapView;
+@property (nonatomic, strong)UIButton *searchButton;
+@property (nonatomic, strong)UIButton *categoryButton;
 
-@interface EWEMapViewController ()
 
 @end
 
@@ -24,24 +28,35 @@
     return self;
 }
 
+-(void)loadView
+{
+    
+    self.view = [[UIView alloc]init];
+    CGFloat width = self.view.frame.size.width;
+    self.navBar = [[UINavigationBar alloc] initWithFrame:
+                   CGRectMake(0,0,width,64)];
+    _navBar.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+    [self.view addSubview:_navBar];
+
+    
+}
+
+
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.\ MKMapView *mapView = [[MKMapView alloc]initWithFrame:CGRectMake(0, 0, 320, 480)];
-    MKMapView *mapView = [[MKMapView alloc]initWithFrame:self.view.bounds];
-    mapView.mapType = MKMapTypeStandard;
-    mapView.zoomEnabled = YES;
-    mapView.scrollEnabled = YES;
-    mapView.showsUserLocation = YES;
-    [self.view addSubview:mapView];
-   
+    // Do any additional setup after loading the view.
+    self.mapView.delegate = self;
+    self.mapView = [[MKMapView alloc]initWithFrame:self.view.bounds];
+    self.mapView.mapType = MKMapTypeStandard;
+    self.mapView.zoomEnabled = YES;
+    self.mapView.scrollEnabled = YES;
+    self.mapView.showsUserLocation = YES;
+    [self.view addSubview:self.mapView];
     
     
-   
-    
-    
-    
-    
+
 }
 
 - (void)didReceiveMemoryWarning

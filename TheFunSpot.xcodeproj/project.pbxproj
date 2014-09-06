@@ -7,9 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3B040BB119B7A3CC000193E0 /* EWEMainTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B040BB019B7A3CC000193E0 /* EWEMainTableViewController.m */; };
 		3B040BB319B7AB9D000193E0 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B040BB219B7AB9D000193E0 /* MapKit.framework */; };
-		3B040BB619B7B1D4000193E0 /* EWEMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B040BB519B7B1D4000193E0 /* EWEMapViewController.m */; };
+		3B6A0D6219B8122A006B3692 /* EWEMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B6A0D6119B8122A006B3692 /* EWEMainViewController.m */; };
+		3B9FD1F019BB493E00C88617 /* EWESeachView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B9FD1EF19BB493E00C88617 /* EWESeachView.m */; };
+		3BC4E2AA19B901370041F576 /* EWEMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BC4E2A919B901370041F576 /* EWEMapViewController.m */; };
 		3BD8405219B76D9D0039B72A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BD8405119B76D9D0039B72A /* Foundation.framework */; };
 		3BD8405419B76D9D0039B72A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BD8405319B76D9D0039B72A /* CoreGraphics.framework */; };
 		3BD8405619B76D9D0039B72A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BD8405519B76D9D0039B72A /* UIKit.framework */; };
@@ -35,11 +36,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		3B040BAF19B7A3CC000193E0 /* EWEMainTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EWEMainTableViewController.h; sourceTree = "<group>"; };
-		3B040BB019B7A3CC000193E0 /* EWEMainTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EWEMainTableViewController.m; sourceTree = "<group>"; };
 		3B040BB219B7AB9D000193E0 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
-		3B040BB419B7B1D4000193E0 /* EWEMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EWEMapViewController.h; sourceTree = "<group>"; };
-		3B040BB519B7B1D4000193E0 /* EWEMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EWEMapViewController.m; sourceTree = "<group>"; };
+		3B6A0D6019B8122A006B3692 /* EWEMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EWEMainViewController.h; sourceTree = "<group>"; };
+		3B6A0D6119B8122A006B3692 /* EWEMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EWEMainViewController.m; sourceTree = "<group>"; };
+		3B9FD1EE19BB493E00C88617 /* EWESeachView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EWESeachView.h; sourceTree = "<group>"; };
+		3B9FD1EF19BB493E00C88617 /* EWESeachView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EWESeachView.m; sourceTree = "<group>"; };
+		3BC4E2A819B901370041F576 /* EWEMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EWEMapViewController.h; sourceTree = "<group>"; };
+		3BC4E2A919B901370041F576 /* EWEMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EWEMapViewController.m; sourceTree = "<group>"; };
 		3BD8404E19B76D9D0039B72A /* TheFunSpot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TheFunSpot.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3BD8405119B76D9D0039B72A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		3BD8405319B76D9D0039B72A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -119,10 +122,12 @@
 			children = (
 				3BD8406019B76D9D0039B72A /* EWEAppDelegate.h */,
 				3BD8406119B76D9D0039B72A /* EWEAppDelegate.m */,
-				3B040BAF19B7A3CC000193E0 /* EWEMainTableViewController.h */,
-				3B040BB019B7A3CC000193E0 /* EWEMainTableViewController.m */,
-				3B040BB419B7B1D4000193E0 /* EWEMapViewController.h */,
-				3B040BB519B7B1D4000193E0 /* EWEMapViewController.m */,
+				3B6A0D6019B8122A006B3692 /* EWEMainViewController.h */,
+				3B6A0D6119B8122A006B3692 /* EWEMainViewController.m */,
+				3BC4E2A819B901370041F576 /* EWEMapViewController.h */,
+				3BC4E2A919B901370041F576 /* EWEMapViewController.m */,
+				3B9FD1EE19BB493E00C88617 /* EWESeachView.h */,
+				3B9FD1EF19BB493E00C88617 /* EWESeachView.m */,
 				3BD8406319B76D9D0039B72A /* Images.xcassets */,
 				3BD8405819B76D9D0039B72A /* Supporting Files */,
 			);
@@ -255,9 +260,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				3BD8406219B76D9D0039B72A /* EWEAppDelegate.m in Sources */,
+				3B9FD1F019BB493E00C88617 /* EWESeachView.m in Sources */,
+				3B6A0D6219B8122A006B3692 /* EWEMainViewController.m in Sources */,
 				3BD8405E19B76D9D0039B72A /* main.m in Sources */,
-				3B040BB119B7A3CC000193E0 /* EWEMainTableViewController.m in Sources */,
-				3B040BB619B7B1D4000193E0 /* EWEMapViewController.m in Sources */,
+				3BC4E2AA19B901370041F576 /* EWEMapViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
