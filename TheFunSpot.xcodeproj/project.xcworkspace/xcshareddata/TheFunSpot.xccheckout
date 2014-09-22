@@ -10,29 +10,29 @@
 	<string>TheFunSpot</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>DA9F5A0E-D643-446A-B569-38981033C193</key>
+		<key>99972F34E1EEBB6A27EB91D5837D0483918E128F</key>
 		<string>https://github.com/kervs/TheFunSpot.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>TheFunSpot.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>DA9F5A0E-D643-446A-B569-38981033C193</key>
+		<key>99972F34E1EEBB6A27EB91D5837D0483918E128F</key>
 		<string>../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>https://github.com/kervs/TheFunSpot.git</string>
 	<key>IDESourceControlProjectVersion</key>
-	<integer>110</integer>
+	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>DA9F5A0E-D643-446A-B569-38981033C193</string>
+	<string>99972F34E1EEBB6A27EB91D5837D0483918E128F</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>DA9F5A0E-D643-446A-B569-38981033C193</string>
+			<string>99972F34E1EEBB6A27EB91D5837D0483918E128F</string>
 			<key>IDESourceControlWCCName</key>
 			<string>TheFunSpot</string>
 		</dict>

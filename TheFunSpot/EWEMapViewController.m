@@ -8,25 +8,37 @@
 
 #import "EWEMapViewController.h"
 #import <MapKit/MapKit.h>
+#import "EWESearchViewController.h"
+#import "EWEDatasource.h"
+#import "EWESpot.h"
+#import "EWECategory.h"
+
 @interface EWEMapViewController () <MKMapViewDelegate>
 @property (nonatomic, strong)UINavigationBar *navBar;
 @property (nonatomic, strong)MKMapView *mapView;
 @property (nonatomic, strong)UIButton *searchButton;
 @property (nonatomic, strong)UIButton *categoryButton;
+@property (nonatomic, strong)UIButton *listButton;
+@property (nonatomic, strong)NSMutableArray *spotslocation;
+@property (nonatomic, strong)UILongPressGestureRecognizer *longPress;
+@property (nonatomic, strong)EWEDatasource *dataSource;
+
 
 
 @end
 
 @implementation EWEMapViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+- (instancetype) init {
+    self = [super init];
     if (self) {
-        // Custom initialization
+        
+
+        
     }
     return self;
 }
+
 
 -(void)loadView
 {
@@ -36,29 +48,105 @@
     self.navBar = [[UINavigationBar alloc] initWithFrame:
                    CGRectMake(0,0,width,64)];
     _navBar.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+    
     [self.view addSubview:_navBar];
-
     
 }
 
-
-
-- (void)viewDidLoad
-{
+-(void)viewDidLoad{
     [super viewDidLoad];
+    
+}
+
+- (void)viewWillLayoutSubviews
+{
+    [super viewWillLayoutSubviews];
     // Do any additional setup after loading the view.
+    CGFloat width = self.view.frame.size.width;
+
+    self.mapView = [[MKMapView alloc]initWithFrame:CGRectMake(0, 64, width, self.view.bounds.size.height - 64)];
     self.mapView.delegate = self;
-    self.mapView = [[MKMapView alloc]initWithFrame:self.view.bounds];
     self.mapView.mapType = MKMapTypeStandard;
     self.mapView.zoomEnabled = YES;
     self.mapView.scrollEnabled = YES;
     self.mapView.showsUserLocation = YES;
     [self.view addSubview:self.mapView];
     
+    self.listButton = [[UIButton alloc]initWithFrame:CGRectMake(20, 30, 30, 20)];
+    [self.listButton setImage:[UIImage imageNamed:@"list"] forState:UIControlStateNormal];
+    [self.listButton addTarget:self action:@selector(listButtonPressed) forControlEvents:UIControlEventTouchUpInside];
+    self.listButton.autoresizingMask = UIViewAutoresizingFlexibleRightMargin;
+    [self.navBar addSubview:self.listButton];
     
+    self.categoryButton = [[UIButton alloc]initWithFrame:CGRectMake(width - 30 - 10, 30, 20, 20)];
+    [self.categoryButton setImage:[UIImage imageNamed:@"cate"] forState:UIControlStateNormal];
+    self.categoryButton.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin;
+    [self.navBar addSubview:self.categoryButton];
+    
+    self.searchButton = [[UIButton alloc]initWithFrame:CGRectMake((width - 60 - 20), 30, 20, 20)];
+    [self.searchButton setImage:[UIImage imageNamed:@"search"] forState:UIControlStateNormal];
+    [self.searchButton addTarget:self action:@selector(searchButtonPressed) forControlEvents:UIControlEventTouchUpInside];
+    self.searchButton.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin;
+    [self.navBar addSubview:self.searchButton];
+    
+    
+    self.longPress = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(handleLongPress:)];
+    self.longPress.minimumPressDuration = 2.0;
+    [self.mapView addGestureRecognizer:self.longPress];
+    
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(130,30,150,20)];
+    label.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+    label.text = @"FunSpot";
+    label.backgroundColor = [UIColor clearColor];
+    label.font = [UIFont fontWithName:@"Marker Felt" size:20];
+    [self.navBar addSubview:label];
+    
+  
+    
+}
+
+-(void)listButtonPressed {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)handleLongPress:(UIGestureRecognizer *)gestureRecognizer
+{
+    if (gestureRecognizer.state != UIGestureRecognizerStateBegan)
+        return;
+    
+    CGPoint touchPoint = [gestureRecognizer locationInView:self.mapView];
+    CLLocationCoordinate2D touchMapCoordinate =
+    [self.mapView convertPoint:touchPoint toCoordinateFromView:self.mapView];
+    
+    MKPointAnnotation *thePoint = [[MKPointAnnotation alloc]init];
+    thePoint.coordinate = touchMapCoordinate;
+    [self.mapView addAnnotation:thePoint];
+    
+}
+
+-(void) mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation{
+   
+    for (EWESpot *spot in [EWEDatasource sharedInstance].spotAdded) {
+        MKPointAnnotation *thePoint = [[MKPointAnnotation alloc]init];
+        thePoint.title = spot.spotName;
+        thePoint.coordinate = spot.location;
+        [self.mapView addAnnotation:thePoint];
+    }
+    
+    EWESpot *spot;
+    CLLocationCoordinate2D coord = spot.location;
+    MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(coord, 2000.0, 2000.0);
+    
+    [self.mapView setRegion:region animated:YES];
 
 }
 
+-(void)searchButtonPressed {
+    EWESearchViewController *searchView = [[EWESearchViewController alloc]init];
+    [self presentViewController:searchView animated:YES completion:nil];
+
+    
+}
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];

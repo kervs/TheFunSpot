@@ -1,0 +1,165 @@
+//
+//  EWEDatasource.m
+//  TheFunSpot
+//
+//  Created by Kervins Valcourt on 9/10/14.
+//  Copyright (c) 2014 EastoftheWestEnd. All rights reserved.
+//
+
+#import "EWEDatasource.h"
+#import "EWECategory.h"
+#import "EWESpot.h"
+#import <CoreLocation/CoreLocation.h>
+#import "NSString+StringUtilities.h"
+
+
+@interface EWEDatasource ()<CLLocationManagerDelegate>
+@property (nonatomic, strong) NSArray *spotAdded;
+@property (nonatomic, strong) NSArray *categories;
+@end
+
+@implementation EWEDatasource
+
+// to have only one instance of this class
++(instancetype) sharedInstance {
+    static dispatch_once_t once;
+    static id sharedInstance;
+    dispatch_once(&once, ^{
+        sharedInstance = [[self alloc] init];
+    });
+    return sharedInstance;
+    
+}
+
+-(instancetype) init {
+    self = [super init];
+    if (self) {
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            NSString *fullPath = [self pathForFilename:NSStringFromSelector(@selector(spotAdded))];
+            NSString *catFullPath = [self pathForFilename:NSStringFromSelector(@selector(categories))];
+            NSArray *storedSpotsItems = [NSKeyedUnarchiver unarchiveObjectWithFile:fullPath];
+            NSArray *storedCatItems = [NSKeyedUnarchiver unarchiveObjectWithFile:catFullPath];
+            if (storedSpotsItems.count == 0) {
+                [self addRandomData];
+            }else {
+                self.spotAdded = storedSpotsItems;
+                self.categories = storedCatItems;
+            }
+        });
+        
+        
+    }
+    return self;
+}
+
+-(void) addRandomData {
+    NSMutableArray *randomSpotData = [NSMutableArray array];
+    NSMutableArray *randomCatData = [NSMutableArray array];
+    
+    for (int i = 0; i <= 5; i++) {
+        [randomSpotData addObject:[self addRandomSpot]];
+        [randomCatData addObject:[self addRandomCategory]];
+        ((EWESpot *) randomSpotData[i]).categoryID = ((EWECategory *)randomCatData[i]).identifier;
+        ((EWESpot *) randomSpotData[i]).category = randomCatData[i];
+    }
+    
+    self.spotAdded = randomSpotData;
+    self.categories = randomCatData;
+    
+    if (self.spotAdded.count > 0 && self.categories > 0) {
+        // Write the changes to disk
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            NSUInteger numberOfItemsToSave = MIN(self.spotAdded.count, 10);
+            NSUInteger numberOfCatItemsToSave = MIN(self.categories.count, 10);
+            NSArray *spotsToSave = [self.spotAdded subarrayWithRange:NSMakeRange(0, numberOfItemsToSave)];
+            NSArray *catToSave = [self.categories subarrayWithRange:NSMakeRange(0, numberOfCatItemsToSave)];
+            
+            NSString *fullPath = [self pathForFilename:NSStringFromSelector(@selector(spotAdded))];
+            NSString *catfullPath = [self pathForFilename:NSStringFromSelector(@selector(categories))];
+            NSData *spotData = [NSKeyedArchiver archivedDataWithRootObject:spotsToSave];
+            NSData *catData = [NSKeyedArchiver archivedDataWithRootObject:catToSave];
+            
+            NSError *dataError;
+            BOOL wroteSuccessfully = [spotData writeToFile:fullPath options:NSDataWritingAtomic | NSDataWritingFileProtectionCompleteUnlessOpen error:&dataError];
+            BOOL catwroteSuccessfully = [catData writeToFile:catfullPath options:NSDataWritingAtomic | NSDataWritingFileProtectionCompleteUnlessOpen error:&dataError];
+            
+            if (!wroteSuccessfully && !catwroteSuccessfully) {
+                NSLog(@"Couldn't write file: %@", dataError);
+            }
+        });
+        
+    }
+
+}
+
+- (NSString *) pathForFilename:(NSString *) filename {
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths firstObject];
+    NSString *dataPath = [documentsDirectory stringByAppendingPathComponent:filename];
+    return dataPath;
+}
+
+
+
+-(EWECategory *) addRandomCategory {
+    NSString *randomName = [NSString randomStringOfLength:10];
+    
+    CGFloat red =  (CGFloat)random()/(CGFloat)RAND_MAX;
+    CGFloat blue = (CGFloat)random()/(CGFloat)RAND_MAX;
+    CGFloat green = (CGFloat)random()/(CGFloat)RAND_MAX;
+    
+    UIColor *randomColor = [UIColor colorWithRed:red green:green blue:blue alpha:1.0];
+    
+        
+    return [[EWECategory alloc] initWithName:randomName andColor:randomColor];
+    
+}
+
+-(EWESpot *) addRandomSpot{
+    EWESpot *testSpot = [[EWESpot alloc]init];
+    
+    NSUInteger wordCount = arc4random_uniform(20);
+    
+    NSMutableString *randomSentence = [[NSMutableString alloc] init];
+    
+    for (int i  = 0; i <= wordCount; i++) {
+        NSString *randomWord = [NSString randomStringOfLength:arc4random_uniform(12)];
+        [randomSentence appendFormat:@"%@ ", randomWord];
+    }
+    
+    testSpot.note = randomSentence;
+    testSpot.spotName = [NSString randomStringOfLength:10];
+    testSpot.location =  CLLocationCoordinate2DMake((double)rand() / RAND_MAX, -(double)rand() / RAND_MAX);
+    return testSpot;
+    
+    
+}
+
+
+- (EWECategory *) addNewCategory:(NSString *)name andColor:(UIColor *)color {
+    EWECategory *newCategory = [[EWECategory alloc] initWithName:name andColor:color];
+    // place in Array
+    NSMutableArray *temp = [NSMutableArray array];
+    for (int i = 0; i > self.categories.count; i++) {
+        [temp addObject:self.categories[i]];
+    }
+    [temp addObject:newCategory];
+    self.categories = temp;
+    return newCategory;
+}
+
+- (EWESpot *) addSpotName:(NSString *)name addSpotnote:(NSString *)note andLocation:(CLLocationCoordinate2D)location {
+    EWESpot *newSpot = [[EWESpot alloc]initWithSpotName:name spotNote:note andLocation:location];
+    
+    NSMutableArray *temp = [NSMutableArray array];
+    for (int i = 0; i > self.spotAdded.count; i++) {
+        [temp addObject:self.spotAdded[i]];
+    }
+    
+    [temp addObject:newSpot];
+    self.spotAdded = temp;
+    return newSpot;
+    
+}
+
+@end

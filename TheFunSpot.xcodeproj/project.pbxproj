@@ -9,7 +9,13 @@
 /* Begin PBXBuildFile section */
 		3B040BB319B7AB9D000193E0 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B040BB219B7AB9D000193E0 /* MapKit.framework */; };
 		3B6A0D6219B8122A006B3692 /* EWEMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B6A0D6119B8122A006B3692 /* EWEMainViewController.m */; };
-		3B9FD1F019BB493E00C88617 /* EWESeachView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B9FD1EF19BB493E00C88617 /* EWESeachView.m */; };
+		3B753AEB19C0BAC600710FE1 /* EWECategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B753AEA19C0BAC600710FE1 /* EWECategory.m */; };
+		3B753AEE19C0BE5F00710FE1 /* EWESpot.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B753AED19C0BE5F00710FE1 /* EWESpot.m */; };
+		3B753AF119C10AB300710FE1 /* EWEDatasource.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B753AF019C10AB300710FE1 /* EWEDatasource.m */; };
+		3B753AF619C8B04300710FE1 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B753AF519C8B04300710FE1 /* CoreLocation.framework */; };
+		3B753AF919CCA7D600710FE1 /* NSString+StringUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B753AF819CCA7D600710FE1 /* NSString+StringUtilities.m */; };
+		3B9FD1F319BE488E00C88617 /* EWESearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B9FD1F219BE488E00C88617 /* EWESearchViewController.m */; };
+		3B9FD1F619BE718000C88617 /* EWECategoryTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B9FD1F519BE718000C88617 /* EWECategoryTableViewController.m */; };
 		3BC4E2AA19B901370041F576 /* EWEMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BC4E2A919B901370041F576 /* EWEMapViewController.m */; };
 		3BD8405219B76D9D0039B72A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BD8405119B76D9D0039B72A /* Foundation.framework */; };
 		3BD8405419B76D9D0039B72A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BD8405319B76D9D0039B72A /* CoreGraphics.framework */; };
@@ -39,8 +45,19 @@
 		3B040BB219B7AB9D000193E0 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		3B6A0D6019B8122A006B3692 /* EWEMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EWEMainViewController.h; sourceTree = "<group>"; };
 		3B6A0D6119B8122A006B3692 /* EWEMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EWEMainViewController.m; sourceTree = "<group>"; };
-		3B9FD1EE19BB493E00C88617 /* EWESeachView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EWESeachView.h; sourceTree = "<group>"; };
-		3B9FD1EF19BB493E00C88617 /* EWESeachView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EWESeachView.m; sourceTree = "<group>"; };
+		3B753AE919C0BAC600710FE1 /* EWECategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EWECategory.h; sourceTree = "<group>"; };
+		3B753AEA19C0BAC600710FE1 /* EWECategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EWECategory.m; sourceTree = "<group>"; };
+		3B753AEC19C0BE5F00710FE1 /* EWESpot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EWESpot.h; sourceTree = "<group>"; };
+		3B753AED19C0BE5F00710FE1 /* EWESpot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EWESpot.m; sourceTree = "<group>"; };
+		3B753AEF19C10AB300710FE1 /* EWEDatasource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EWEDatasource.h; sourceTree = "<group>"; };
+		3B753AF019C10AB300710FE1 /* EWEDatasource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EWEDatasource.m; sourceTree = "<group>"; };
+		3B753AF519C8B04300710FE1 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		3B753AF719CCA7D600710FE1 /* NSString+StringUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+StringUtilities.h"; sourceTree = "<group>"; };
+		3B753AF819CCA7D600710FE1 /* NSString+StringUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+StringUtilities.m"; sourceTree = "<group>"; };
+		3B9FD1F119BE488E00C88617 /* EWESearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EWESearchViewController.h; sourceTree = "<group>"; };
+		3B9FD1F219BE488E00C88617 /* EWESearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EWESearchViewController.m; sourceTree = "<group>"; };
+		3B9FD1F419BE718000C88617 /* EWECategoryTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EWECategoryTableViewController.h; sourceTree = "<group>"; };
+		3B9FD1F519BE718000C88617 /* EWECategoryTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EWECategoryTableViewController.m; sourceTree = "<group>"; };
 		3BC4E2A819B901370041F576 /* EWEMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EWEMapViewController.h; sourceTree = "<group>"; };
 		3BC4E2A919B901370041F576 /* EWEMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EWEMapViewController.m; sourceTree = "<group>"; };
 		3BD8404E19B76D9D0039B72A /* TheFunSpot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TheFunSpot.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -66,6 +83,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3B753AF619C8B04300710FE1 /* CoreLocation.framework in Frameworks */,
 				3B040BB319B7AB9D000193E0 /* MapKit.framework in Frameworks */,
 				3BD8405419B76D9D0039B72A /* CoreGraphics.framework in Frameworks */,
 				3BD8405619B76D9D0039B72A /* UIKit.framework in Frameworks */,
@@ -108,6 +126,7 @@
 		3BD8405019B76D9D0039B72A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3B753AF519C8B04300710FE1 /* CoreLocation.framework */,
 				3B040BB219B7AB9D000193E0 /* MapKit.framework */,
 				3BD8405119B76D9D0039B72A /* Foundation.framework */,
 				3BD8405319B76D9D0039B72A /* CoreGraphics.framework */,
@@ -126,8 +145,18 @@
 				3B6A0D6119B8122A006B3692 /* EWEMainViewController.m */,
 				3BC4E2A819B901370041F576 /* EWEMapViewController.h */,
 				3BC4E2A919B901370041F576 /* EWEMapViewController.m */,
-				3B9FD1EE19BB493E00C88617 /* EWESeachView.h */,
-				3B9FD1EF19BB493E00C88617 /* EWESeachView.m */,
+				3B9FD1F119BE488E00C88617 /* EWESearchViewController.h */,
+				3B9FD1F219BE488E00C88617 /* EWESearchViewController.m */,
+				3B9FD1F419BE718000C88617 /* EWECategoryTableViewController.h */,
+				3B9FD1F519BE718000C88617 /* EWECategoryTableViewController.m */,
+				3B753AE919C0BAC600710FE1 /* EWECategory.h */,
+				3B753AEA19C0BAC600710FE1 /* EWECategory.m */,
+				3B753AEC19C0BE5F00710FE1 /* EWESpot.h */,
+				3B753AED19C0BE5F00710FE1 /* EWESpot.m */,
+				3B753AEF19C10AB300710FE1 /* EWEDatasource.h */,
+				3B753AF019C10AB300710FE1 /* EWEDatasource.m */,
+				3B753AF719CCA7D600710FE1 /* NSString+StringUtilities.h */,
+				3B753AF819CCA7D600710FE1 /* NSString+StringUtilities.m */,
 				3BD8406319B76D9D0039B72A /* Images.xcassets */,
 				3BD8405819B76D9D0039B72A /* Supporting Files */,
 			);
@@ -148,8 +177,8 @@
 		3BD8407019B76D9D0039B72A /* TheFunSpotTests */ = {
 			isa = PBXGroup;
 			children = (
-				3BD8407619B76D9D0039B72A /* TheFunSpotTests.m */,
 				3BD8407119B76D9D0039B72A /* Supporting Files */,
+				3BD8407619B76D9D0039B72A /* TheFunSpotTests.m */,
 			);
 			path = TheFunSpotTests;
 			sourceTree = "<group>";
@@ -260,10 +289,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				3BD8406219B76D9D0039B72A /* EWEAppDelegate.m in Sources */,
-				3B9FD1F019BB493E00C88617 /* EWESeachView.m in Sources */,
+				3B753AEE19C0BE5F00710FE1 /* EWESpot.m in Sources */,
+				3B753AF119C10AB300710FE1 /* EWEDatasource.m in Sources */,
+				3B753AF919CCA7D600710FE1 /* NSString+StringUtilities.m in Sources */,
 				3B6A0D6219B8122A006B3692 /* EWEMainViewController.m in Sources */,
+				3B9FD1F619BE718000C88617 /* EWECategoryTableViewController.m in Sources */,
 				3BD8405E19B76D9D0039B72A /* main.m in Sources */,
+				3B9FD1F319BE488E00C88617 /* EWESearchViewController.m in Sources */,
 				3BC4E2AA19B901370041F576 /* EWEMapViewController.m in Sources */,
+				3B753AEB19C0BAC600710FE1 /* EWECategory.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

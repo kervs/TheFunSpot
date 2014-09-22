@@ -8,6 +8,5 @@
 
 #import <UIKit/UIKit.h>
 
-@interface EWEMainViewController : UIViewController
-
+@interface EWEMainViewController : UIViewController 
 @end
