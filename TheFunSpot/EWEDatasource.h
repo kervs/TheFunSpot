@@ -18,5 +18,5 @@
 
 - (EWECategory *) addNewCategory:(NSString *)name andColor:(UIColor *)color;
 - (EWESpot *) addSpotName:(NSString *)name addSpotnote:(NSString *)note andLocation:(CLLocationCoordinate2D)location;
-
+- (void) delCategory:(EWECategory *)category;
 @end

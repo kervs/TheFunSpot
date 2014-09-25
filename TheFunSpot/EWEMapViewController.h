@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MapKit/MapKit.h>
 
-@interface EWEMapViewController : UIViewController 
+@interface EWEMapViewController : UIViewController
+
+@property (nonatomic, assign) CLLocationCoordinate2D newLocation;
+@property (nonatomic, strong) NSArray *listOfLocation;
 
 @end

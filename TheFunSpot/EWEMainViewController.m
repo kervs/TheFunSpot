@@ -32,7 +32,7 @@
 - (instancetype) init {
     self = [super init];
     if (self) {
-        NSMutableArray *names = [@[] mutableCopy];
+        NSMutableArray *names = [NSMutableArray array];
         for (EWESpot *spot in [EWEDatasource sharedInstance].spotAdded) {
             [names addObject:spot];
         }
@@ -46,7 +46,9 @@
 {
     self.view = [[UIView alloc]init];
     CGFloat width = self.view.frame.size.width;
+    // want to add the style to be UITableViewCellStyleSubtitle
     self.tableView = [UITableView new];
+
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     self.tableView.autoresizingMask = UIViewAutoresizingNone;
@@ -138,8 +140,7 @@
     self.modalPresentationStyle = UIModalPresentationCurrentContext;
     
     [self presentViewController:categoryView animated:YES completion:nil];
-    
-//    categoryView.view.superview.frame = CGRectInset(categoryView.view.superview.frame, 100, 50);
+
    
 }
 - (void)didReceiveMemoryWarning
@@ -161,18 +162,25 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     EWESpot *spot = [self.names objectAtIndex:indexPath.row];
+    
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
     
+  
+
     // Configure the cell...
     
     [cell.textLabel setText:spot.spotName];
+    [cell.detailTextLabel setText:spot.note];
     // if this category is selected
-
+     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     // else nothing
     return cell;
 }
 
 -(void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    EWEMapViewController *mapView = [[EWEMapViewController alloc]init];
+    [self presentViewController:mapView animated:YES completion:nil];
     
 }
 

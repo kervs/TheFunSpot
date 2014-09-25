@@ -12,6 +12,7 @@
 #import "EWEDatasource.h"
 #import "EWESpot.h"
 #import "EWECategory.h"
+#import "EWENewSpotViewController.h"
 
 @interface EWEMapViewController () <MKMapViewDelegate>
 @property (nonatomic, strong)UINavigationBar *navBar;
@@ -19,7 +20,7 @@
 @property (nonatomic, strong)UIButton *searchButton;
 @property (nonatomic, strong)UIButton *categoryButton;
 @property (nonatomic, strong)UIButton *listButton;
-@property (nonatomic, strong)NSMutableArray *spotslocation;
+
 @property (nonatomic, strong)UILongPressGestureRecognizer *longPress;
 @property (nonatomic, strong)EWEDatasource *dataSource;
 
@@ -113,17 +114,45 @@
 {
     if (gestureRecognizer.state != UIGestureRecognizerStateBegan)
         return;
-    
+    EWESearchViewController *searchView = [[EWESearchViewController alloc]init];
+    [self presentViewController:searchView animated:nil completion:nil];
     CGPoint touchPoint = [gestureRecognizer locationInView:self.mapView];
-    CLLocationCoordinate2D touchMapCoordinate =
-    [self.mapView convertPoint:touchPoint toCoordinateFromView:self.mapView];
+   
+    self.newLocation = [self.mapView convertPoint:touchPoint toCoordinateFromView:self.mapView];
     
-    MKPointAnnotation *thePoint = [[MKPointAnnotation alloc]init];
-    thePoint.coordinate = touchMapCoordinate;
-    [self.mapView addAnnotation:thePoint];
     
+    MKLocalSearchRequest *request = [[MKLocalSearchRequest alloc] init];
+    request.naturalLanguageQuery = @"Restaurants";
+    request.region = MKCoordinateRegionMakeWithDistance(self.newLocation, 500, 500);;
+    MKLocalSearch *search = [[MKLocalSearch alloc] initWithRequest:request];
+    [search startWithCompletionHandler:^(MKLocalSearchResponse *response, NSError *error) {
+        NSMutableArray *temp = [[NSMutableArray alloc]init];
+        for (MKMapItem *mapItem in [response mapItems]) {
+            
+            NSLog(@"Map Items: %@, Placemark title: %f", mapItem.name,[[mapItem placemark]coordinate].latitude);
+            
+            
+           
+            [temp addObject:mapItem];
+            
+            
+        }
+        self.listOfLocation = temp;
+        
+    }];
+
 }
 
+//- (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation
+//{
+//    MKPinAnnotationView *view = [[MKPinAnnotationView alloc]initWithAnnotation:annotation reuseIdentifier:@"pin"];
+//    view.pinColor = MKPinAnnotationColorGreen;
+//    view.enabled = YES;
+//    view.animatesDrop = YES;
+//    view.canShowCallout = YES;
+//    return view;
+//    
+//}
 -(void) mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation{
    
     for (EWESpot *spot in [EWEDatasource sharedInstance].spotAdded) {
@@ -142,6 +171,8 @@
 }
 
 -(void)searchButtonPressed {
+    
+  
     EWESearchViewController *searchView = [[EWESearchViewController alloc]init];
     [self presentViewController:searchView animated:YES completion:nil];
 

@@ -34,18 +34,18 @@
 -(instancetype) init {
     self = [super init];
     if (self) {
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        
             NSString *fullPath = [self pathForFilename:NSStringFromSelector(@selector(spotAdded))];
             NSString *catFullPath = [self pathForFilename:NSStringFromSelector(@selector(categories))];
             NSArray *storedSpotsItems = [NSKeyedUnarchiver unarchiveObjectWithFile:fullPath];
             NSArray *storedCatItems = [NSKeyedUnarchiver unarchiveObjectWithFile:catFullPath];
-            if (storedSpotsItems.count == 0) {
+            if (storedSpotsItems.count == 0 || storedCatItems.count == 0) {
                 [self addRandomData];
             }else {
                 self.spotAdded = storedSpotsItems;
                 self.categories = storedCatItems;
             }
-        });
+        
         
         
     }
@@ -139,22 +139,26 @@
 - (EWECategory *) addNewCategory:(NSString *)name andColor:(UIColor *)color {
     EWECategory *newCategory = [[EWECategory alloc] initWithName:name andColor:color];
     // place in Array
-    NSMutableArray *temp = [NSMutableArray array];
-    for (int i = 0; i > self.categories.count; i++) {
-        [temp addObject:self.categories[i]];
-    }
+    NSMutableArray *temp = [[NSMutableArray alloc]initWithArray:self.categories];
     [temp addObject:newCategory];
     self.categories = temp;
     return newCategory;
+}
+- (void) delCategory:(EWECategory *)category {
+    
+
+    NSMutableArray *temp = [[NSMutableArray alloc]initWithArray:self.categories];
+    
+    self.categories = [temp filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"name != %@",category.name]];
+    
+    NSLog(@"%@",self.categories);
+    
 }
 
 - (EWESpot *) addSpotName:(NSString *)name addSpotnote:(NSString *)note andLocation:(CLLocationCoordinate2D)location {
     EWESpot *newSpot = [[EWESpot alloc]initWithSpotName:name spotNote:note andLocation:location];
     
-    NSMutableArray *temp = [NSMutableArray array];
-    for (int i = 0; i > self.spotAdded.count; i++) {
-        [temp addObject:self.spotAdded[i]];
-    }
+    NSMutableArray *temp = [[NSMutableArray alloc]initWithArray:self.spotAdded];
     
     [temp addObject:newSpot];
     self.spotAdded = temp;

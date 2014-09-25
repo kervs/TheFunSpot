@@ -19,13 +19,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "TheFunSpot/EWEDatasource.m"
-            timestampString = "433109921.605909"
+            filePath = "TheFunSpot/EWEMapViewController.m"
+            timestampString = "433308098.44461"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "41"
-            endingLineNumber = "41"
-            landmarkName = "-init"
+            startingLineNumber = "140"
+            endingLineNumber = "140"
+            landmarkName = "-handleLongPress:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

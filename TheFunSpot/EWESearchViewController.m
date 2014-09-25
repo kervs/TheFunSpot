@@ -7,16 +7,22 @@
 //
 
 #import "EWESearchViewController.h"
+#import "EWEMapViewController.m"
+#import <MapKit/MapKit.h>
 
-@interface EWESearchViewController () <UITextFieldDelegate>
+@interface EWESearchViewController () <UITextFieldDelegate, UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, strong)UINavigationBar *navBar;
 @property (nonatomic, strong)UIButton *cancelButton;
 @property (nonatomic, strong)UITextField *textField;
+@property (nonatomic, strong)UITableView *tableView;
+@property (nonatomic, strong)NSArray *spotNames;
+
 
 @end
 
 @implementation EWESearchViewController
+
 
 -(void)loadView
 {
@@ -28,6 +34,13 @@
     _navBar.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     self.navBar.backgroundColor = [UIColor lightGrayColor];
     [self.view addSubview:_navBar];
+    self.spotNames = [[EWEMapViewController alloc]init].listOfLocation;
+    self.tableView = [UITableView new];
+
+    self.tableView.dataSource = self;
+    self.tableView.delegate = self;
+    self.tableView.autoresizingMask = UIViewAutoresizingNone;
+    [self.view addSubview:self.tableView];
 }
 
 - (void)viewDidLoad {
@@ -62,7 +75,8 @@
     
     
     [self.navBar addSubview:self.textField];
-
+    
+   
 }
 
 
@@ -79,6 +93,33 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    // Return the number of sections.
+    return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    
+    return self.spotNames.count;
+}
+
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    [self.spotNames objectAtIndex:indexPath.row];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+    
+    // Configure the cell...
+    
+    [cell.textLabel setText:location.listOfLocation];
+    // if this category is selected
+    cell.accessoryType = UITableViewCellAccessoryCheckmark;
+    // else nothing
+
+return cell
+}
+
 
 /*
 #pragma mark - Navigation

@@ -14,6 +14,7 @@
 		3B753AF119C10AB300710FE1 /* EWEDatasource.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B753AF019C10AB300710FE1 /* EWEDatasource.m */; };
 		3B753AF619C8B04300710FE1 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B753AF519C8B04300710FE1 /* CoreLocation.framework */; };
 		3B753AF919CCA7D600710FE1 /* NSString+StringUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B753AF819CCA7D600710FE1 /* NSString+StringUtilities.m */; };
+		3B92958119D3310D00453424 /* EWENewSpotViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B92958019D3310D00453424 /* EWENewSpotViewController.m */; };
 		3B9FD1F319BE488E00C88617 /* EWESearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B9FD1F219BE488E00C88617 /* EWESearchViewController.m */; };
 		3B9FD1F619BE718000C88617 /* EWECategoryTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B9FD1F519BE718000C88617 /* EWECategoryTableViewController.m */; };
 		3BC4E2AA19B901370041F576 /* EWEMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BC4E2A919B901370041F576 /* EWEMapViewController.m */; };
@@ -54,6 +55,8 @@
 		3B753AF519C8B04300710FE1 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		3B753AF719CCA7D600710FE1 /* NSString+StringUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+StringUtilities.h"; sourceTree = "<group>"; };
 		3B753AF819CCA7D600710FE1 /* NSString+StringUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+StringUtilities.m"; sourceTree = "<group>"; };
+		3B92957F19D3310D00453424 /* EWENewSpotViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EWENewSpotViewController.h; sourceTree = "<group>"; };
+		3B92958019D3310D00453424 /* EWENewSpotViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EWENewSpotViewController.m; sourceTree = "<group>"; };
 		3B9FD1F119BE488E00C88617 /* EWESearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EWESearchViewController.h; sourceTree = "<group>"; };
 		3B9FD1F219BE488E00C88617 /* EWESearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EWESearchViewController.m; sourceTree = "<group>"; };
 		3B9FD1F419BE718000C88617 /* EWECategoryTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EWECategoryTableViewController.h; sourceTree = "<group>"; };
@@ -104,6 +107,34 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3B48CA5F19D1D85C00269DD0 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				3B753AE919C0BAC600710FE1 /* EWECategory.h */,
+				3B753AEA19C0BAC600710FE1 /* EWECategory.m */,
+				3B753AEC19C0BE5F00710FE1 /* EWESpot.h */,
+				3B753AED19C0BE5F00710FE1 /* EWESpot.m */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		3B48CA6019D1D86B00269DD0 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				3B6A0D6019B8122A006B3692 /* EWEMainViewController.h */,
+				3B6A0D6119B8122A006B3692 /* EWEMainViewController.m */,
+				3BC4E2A819B901370041F576 /* EWEMapViewController.h */,
+				3BC4E2A919B901370041F576 /* EWEMapViewController.m */,
+				3B9FD1F119BE488E00C88617 /* EWESearchViewController.h */,
+				3B9FD1F219BE488E00C88617 /* EWESearchViewController.m */,
+				3B9FD1F419BE718000C88617 /* EWECategoryTableViewController.h */,
+				3B9FD1F519BE718000C88617 /* EWECategoryTableViewController.m */,
+				3B92957F19D3310D00453424 /* EWENewSpotViewController.h */,
+				3B92958019D3310D00453424 /* EWENewSpotViewController.m */,
+			);
+			name = ViewControllers;
+			sourceTree = "<group>";
+		};
 		3BD8404519B76D9D0039B72A = {
 			isa = PBXGroup;
 			children = (
@@ -141,22 +172,10 @@
 			children = (
 				3BD8406019B76D9D0039B72A /* EWEAppDelegate.h */,
 				3BD8406119B76D9D0039B72A /* EWEAppDelegate.m */,
-				3B6A0D6019B8122A006B3692 /* EWEMainViewController.h */,
-				3B6A0D6119B8122A006B3692 /* EWEMainViewController.m */,
-				3BC4E2A819B901370041F576 /* EWEMapViewController.h */,
-				3BC4E2A919B901370041F576 /* EWEMapViewController.m */,
-				3B9FD1F119BE488E00C88617 /* EWESearchViewController.h */,
-				3B9FD1F219BE488E00C88617 /* EWESearchViewController.m */,
-				3B9FD1F419BE718000C88617 /* EWECategoryTableViewController.h */,
-				3B9FD1F519BE718000C88617 /* EWECategoryTableViewController.m */,
-				3B753AE919C0BAC600710FE1 /* EWECategory.h */,
-				3B753AEA19C0BAC600710FE1 /* EWECategory.m */,
-				3B753AEC19C0BE5F00710FE1 /* EWESpot.h */,
-				3B753AED19C0BE5F00710FE1 /* EWESpot.m */,
+				3B48CA6019D1D86B00269DD0 /* ViewControllers */,
+				3B48CA5F19D1D85C00269DD0 /* Models */,
 				3B753AEF19C10AB300710FE1 /* EWEDatasource.h */,
 				3B753AF019C10AB300710FE1 /* EWEDatasource.m */,
-				3B753AF719CCA7D600710FE1 /* NSString+StringUtilities.h */,
-				3B753AF819CCA7D600710FE1 /* NSString+StringUtilities.m */,
 				3BD8406319B76D9D0039B72A /* Images.xcassets */,
 				3BD8405819B76D9D0039B72A /* Supporting Files */,
 			);
@@ -166,6 +185,8 @@
 		3BD8405819B76D9D0039B72A /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				3B753AF719CCA7D600710FE1 /* NSString+StringUtilities.h */,
+				3B753AF819CCA7D600710FE1 /* NSString+StringUtilities.m */,
 				3BD8405919B76D9D0039B72A /* TheFunSpot-Info.plist */,
 				3BD8405A19B76D9D0039B72A /* InfoPlist.strings */,
 				3BD8405D19B76D9D0039B72A /* main.m */,
@@ -293,6 +314,7 @@
 				3B753AF119C10AB300710FE1 /* EWEDatasource.m in Sources */,
 				3B753AF919CCA7D600710FE1 /* NSString+StringUtilities.m in Sources */,
 				3B6A0D6219B8122A006B3692 /* EWEMainViewController.m in Sources */,
+				3B92958119D3310D00453424 /* EWENewSpotViewController.m in Sources */,
 				3B9FD1F619BE718000C88617 /* EWECategoryTableViewController.m in Sources */,
 				3BD8405E19B76D9D0039B72A /* main.m in Sources */,
 				3B9FD1F319BE488E00C88617 /* EWESearchViewController.m in Sources */,
