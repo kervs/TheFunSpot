@@ -12,7 +12,7 @@
 #import "EWEDatasource.h"
 #import "EWESpot.h"
 #import "EWECategory.h"
-#import "EWENewSpotViewController.h"
+
 
 @interface EWEMapViewController () <MKMapViewDelegate>
 @property (nonatomic, strong)UINavigationBar *navBar;
@@ -73,6 +73,11 @@
     self.mapView.showsUserLocation = YES;
     [self.view addSubview:self.mapView];
     
+    self.longPress = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(handleLongPress:)];
+    self.longPress.minimumPressDuration = 2.0;
+    [self.mapView addGestureRecognizer:self.longPress];
+    
+    
     self.listButton = [[UIButton alloc]initWithFrame:CGRectMake(20, 30, 30, 20)];
     [self.listButton setImage:[UIImage imageNamed:@"list"] forState:UIControlStateNormal];
     [self.listButton addTarget:self action:@selector(listButtonPressed) forControlEvents:UIControlEventTouchUpInside];
@@ -91,10 +96,6 @@
     [self.navBar addSubview:self.searchButton];
     
     
-    self.longPress = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(handleLongPress:)];
-    self.longPress.minimumPressDuration = 2.0;
-    [self.mapView addGestureRecognizer:self.longPress];
-    
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(130,30,150,20)];
     label.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     label.text = @"FunSpot";
@@ -106,42 +107,27 @@
     
 }
 
+
+
 -(void)listButtonPressed {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (void)handleLongPress:(UIGestureRecognizer *)gestureRecognizer
-{
-    if (gestureRecognizer.state != UIGestureRecognizerStateBegan)
-        return;
-    EWESearchViewController *searchView = [[EWESearchViewController alloc]init];
-    [self presentViewController:searchView animated:nil completion:nil];
-    CGPoint touchPoint = [gestureRecognizer locationInView:self.mapView];
-   
-    self.newLocation = [self.mapView convertPoint:touchPoint toCoordinateFromView:self.mapView];
-    
-    
-    MKLocalSearchRequest *request = [[MKLocalSearchRequest alloc] init];
-    request.naturalLanguageQuery = @"Restaurants";
-    request.region = MKCoordinateRegionMakeWithDistance(self.newLocation, 500, 500);;
-    MKLocalSearch *search = [[MKLocalSearch alloc] initWithRequest:request];
-    [search startWithCompletionHandler:^(MKLocalSearchResponse *response, NSError *error) {
-        NSMutableArray *temp = [[NSMutableArray alloc]init];
-        for (MKMapItem *mapItem in [response mapItems]) {
-            
-            NSLog(@"Map Items: %@, Placemark title: %f", mapItem.name,[[mapItem placemark]coordinate].latitude);
-            
-            
-           
-            [temp addObject:mapItem];
-            
-            
-        }
-        self.listOfLocation = temp;
-        
-    }];
-
-}
+//- (void)handleLongPress:(UIGestureRecognizer *)gestureRecognizer
+//{
+//    if (gestureRecognizer.state != UIGestureRecognizerStateBegan)
+//        return;
+//   
+//   
+//    CGPoint touchPoint = [gestureRecognizer locationInView:self.mapView];
+//   
+//    self.newLocation = [self.mapView convertPoint:touchPoint toCoordinateFromView:self.mapView];
+//    
+//    //        self.listOfLocation = temp;
+//        
+//    }];
+//
+//}
 
 //- (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation
 //{

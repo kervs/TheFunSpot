@@ -7,16 +7,20 @@
 //
 
 #import "EWESearchViewController.h"
-#import "EWEMapViewController.m"
+#import "EWEMapViewController.h"
+#import "EWEDatasource.h"
 #import <MapKit/MapKit.h>
 
-@interface EWESearchViewController () <UITextFieldDelegate, UITableViewDataSource, UITableViewDelegate>
+@interface EWESearchViewController () <UISearchBarDelegate, UITableViewDataSource, UITableViewDelegate> {
+    BOOL isSearching;
+}
 
-@property (nonatomic, strong)UINavigationBar *navBar;
-@property (nonatomic, strong)UIButton *cancelButton;
-@property (nonatomic, strong)UITextField *textField;
+
+
+@property (nonatomic, strong)UISearchBar *searchBar;
+@property (nonatomic, strong)UISearchDisplayController *searchBarController;
 @property (nonatomic, strong)UITableView *tableView;
-@property (nonatomic, strong)NSArray *spotNames;
+@property (nonatomic, strong)NSMutableArray *placesNear;
 
 
 @end
@@ -28,15 +32,7 @@
 {
     
     self.view = [[UIView alloc]init];
-    CGFloat width = self.view.frame.size.width;
-    self.navBar = [[UINavigationBar alloc] initWithFrame:
-                   CGRectMake(0,0,width,64)];
-    _navBar.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-    self.navBar.backgroundColor = [UIColor lightGrayColor];
-    [self.view addSubview:_navBar];
-    self.spotNames = [[EWEMapViewController alloc]init].listOfLocation;
     self.tableView = [UITableView new];
-
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     self.tableView.autoresizingMask = UIViewAutoresizingNone;
@@ -46,48 +42,78 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    CGFloat width = self.view.frame.size.width;
-    self.navBar = [[UINavigationBar alloc] initWithFrame:
-                   CGRectMake(0,0,self.view.bounds.size.width,64)];
-    _navBar.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-    [self.view addSubview:_navBar];
+    self.placesNear = [[NSMutableArray  alloc]init];
+    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cell"];
+
+    self.searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, 320, 64)];
+    self.searchBar.showsCancelButton = YES;
+    self.searchBar.keyboardType = UIKeyboardTypeURL;
+    self.searchBar.returnKeyType = UIReturnKeyDone;
+    self.searchBar.autocapitalizationType = UITextAutocapitalizationTypeNone;
+    self.searchBar.autocorrectionType = UITextAutocorrectionTypeNo;
+    self.searchBar.placeholder = NSLocalizedString(@"Search Fun Spots", @"Placeholder text for web browser URL field");
+    self.searchBar.backgroundColor = [UIColor colorWithWhite:220/255.0f alpha:1];
     
-    self.cancelButton = [[UIButton alloc]initWithFrame:CGRectMake(width - 30 - 40, 30, 60, 20)];
-    [self.cancelButton setTitle:@"Cancel" forState:UIControlStateNormal];
-    [self.cancelButton setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
-    [self.cancelButton addTarget:self action:@selector(cancelButtonPressed) forControlEvents:UIControlEventTouchUpInside];
-    self.cancelButton.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin;
-    
-    
-    
-    [self.navBar addSubview:self.cancelButton];
+    self.searchBar.delegate = self;
     
     
-    self.textField = [[UITextField alloc] initWithFrame:CGRectMake(20, 22, 280 - 60, 31)];
-    self.textField.borderStyle = UITextBorderStyleRoundedRect;
-    self.textField.keyboardType = UIKeyboardTypeURL;
-    self.textField.returnKeyType = UIReturnKeyDone;
-    self.textField.autocapitalizationType = UITextAutocapitalizationTypeNone;
-    self.textField.autocorrectionType = UITextAutocorrectionTypeNo;
-    self.textField.placeholder = NSLocalizedString(@"Search Fun Spots", @"Placeholder text for web browser URL field");
-    self.textField.backgroundColor = [UIColor colorWithWhite:220/255.0f alpha:1];
-    self.textField.delegate = self;
-    
-    
-    [self.navBar addSubview:self.textField];
-    
-   
+    [self.view addSubview:self.searchBar];
 }
 
 
--(void)cancelButtonPressed{
+- (void) searchTableList {
+    
+    
+    MKLocalSearchRequest *request = [[MKLocalSearchRequest alloc] init];
+    request.naturalLanguageQuery = self.searchBar.text;
+    request.region = MKCoordinateRegionMakeWithDistance([EWEDatasource sharedInstance].currentCoord.coordinate, 500, 500);
+    MKLocalSearch *search = [[MKLocalSearch alloc] initWithRequest:request];
+    
+    [search startWithCompletionHandler:^(MKLocalSearchResponse *response, NSError *error) {
+        if ([request.naturalLanguageQuery isEqualToString:self.searchBar.text] == NO) {
+            return;
+        }
+        for (MKMapItem *mapItem in [response mapItems]) {
+            NSLog(@"Map Items: %@, Placemark title: %f", mapItem.name,[[mapItem placemark]coordinate].latitude);
+            [self.placesNear addObject:mapItem];
+        }
+        [self.tableView reloadData];
+      
+        
+    }];
+    
+    
+}
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
+    NSLog(@"Text change - %d",isSearching);
+    
+    //Remove all objects first.
+    [self.placesNear removeAllObjects];
+    
+    if([searchText length] != 0) {
+        isSearching = YES;
+        [self searchTableList];
+    }
+    else {
+        isSearching = NO;
+    }
+     //[self.tableView reloadData];
+}
+- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
+    isSearching = YES;
+}
+
+-(void) viewWillLayoutSubviews {
+    [super viewWillLayoutSubviews];
+    CGFloat width = self.view.frame.size.width;
+    self.tableView.frame = CGRectMake(0, 64, width, self.view.frame.size.height - 64);
+}
+
+- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar
+{
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (BOOL)textFieldShouldReturn:(UITextField *)textField {
-    [textField resignFirstResponder];
-    return NO;
-}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -100,24 +126,28 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    
-    return self.spotNames.count;
+    if (isSearching) {
+        return self.placesNear.count;
+    } else {
+        return self.placesNear.count;
+    }
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    [self.spotNames objectAtIndex:indexPath.row];
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
-    
-    // Configure the cell...
-    
-    [cell.textLabel setText:location.listOfLocation];
-    // if this category is selected
-    cell.accessoryType = UITableViewCellAccessoryCheckmark;
-    // else nothing
-
-return cell
+    if(isSearching){
+        MKMapItem *mapItem = [self.placesNear objectAtIndex:indexPath.row];
+        [cell.textLabel setText:mapItem.name];
+        cell.accessoryType = UITableViewCellAccessoryCheckmark;
+    }
+    else
+    {
+        MKMapItem *mapItem = [self.placesNear objectAtIndex:indexPath.row];
+        [cell.textLabel setText:mapItem.name];
+        
+    }
+    return cell;
 }
 
 

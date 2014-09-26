@@ -8,10 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
+#import <CoreLocation/CoreLocation.h>
 
-@interface EWEMapViewController : UIViewController
+@interface EWEMapViewController : UIViewController <CLLocationManagerDelegate>
 
-@property (nonatomic, assign) CLLocationCoordinate2D newLocation;
-@property (nonatomic, strong) NSArray *listOfLocation;
 
 @end

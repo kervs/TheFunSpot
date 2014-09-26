@@ -16,6 +16,8 @@
 @interface EWEDatasource ()<CLLocationManagerDelegate>
 @property (nonatomic, strong) NSArray *spotAdded;
 @property (nonatomic, strong) NSArray *categories;
+@property (nonatomic, assign) CLLocation *currentCoord;
+@property (nonatomic, retain) CLLocationManager *locationManger;
 @end
 
 @implementation EWEDatasource
@@ -35,16 +37,21 @@
     self = [super init];
     if (self) {
         
-            NSString *fullPath = [self pathForFilename:NSStringFromSelector(@selector(spotAdded))];
-            NSString *catFullPath = [self pathForFilename:NSStringFromSelector(@selector(categories))];
-            NSArray *storedSpotsItems = [NSKeyedUnarchiver unarchiveObjectWithFile:fullPath];
-            NSArray *storedCatItems = [NSKeyedUnarchiver unarchiveObjectWithFile:catFullPath];
-            if (storedSpotsItems.count == 0 || storedCatItems.count == 0) {
-                [self addRandomData];
-            }else {
-                self.spotAdded = storedSpotsItems;
-                self.categories = storedCatItems;
-            }
+        NSString *fullPath = [self pathForFilename:NSStringFromSelector(@selector(spotAdded))];
+        NSString *catFullPath = [self pathForFilename:NSStringFromSelector(@selector(categories))];
+        NSArray *storedSpotsItems = [NSKeyedUnarchiver unarchiveObjectWithFile:fullPath];
+        NSArray *storedCatItems = [NSKeyedUnarchiver unarchiveObjectWithFile:catFullPath];
+        self.locationManger = [CLLocationManager new];
+        self.locationManger.delegate = self;
+        [self.locationManger setDesiredAccuracy:kCLLocationAccuracyBest];
+        [self.locationManger setDistanceFilter:kCLDistanceFilterNone];
+        [self.locationManger startUpdatingLocation];
+        if (storedSpotsItems.count == 0 || storedCatItems.count == 0) {
+            [self addRandomData];
+        }else {
+            self.spotAdded = storedSpotsItems;
+            self.categories = storedCatItems;
+        }
         
         
         
@@ -165,5 +172,26 @@
     return newSpot;
     
 }
+
+#pragma mark - AddingLocation
+
+-(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations{
+    
+    
+    self.currentCoord = [locations lastObject];
+    
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
 @end
