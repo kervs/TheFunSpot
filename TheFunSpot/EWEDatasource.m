@@ -14,10 +14,11 @@
 
 
 @interface EWEDatasource ()<CLLocationManagerDelegate>
-@property (nonatomic, strong) NSArray *spotAdded;
-@property (nonatomic, strong) NSArray *categories;
-@property (nonatomic, assign) CLLocation *currentCoord;
-@property (nonatomic, retain) CLLocationManager *locationManger;
+@property (nonatomic, strong)NSArray *spotAdded;
+@property (nonatomic, strong)NSArray *categories;
+@property (nonatomic, assign)CLLocation *currentCoord;
+@property (nonatomic, retain)CLLocationManager *locationManger;
+@property (nonatomic,strong)MKMapItem *mapPoint;
 @end
 
 @implementation EWEDatasource
@@ -156,7 +157,7 @@
 
     NSMutableArray *temp = [[NSMutableArray alloc]initWithArray:self.categories];
     
-    self.categories = [temp filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"name != %@",category.name]];
+    self.categories = [temp filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"ANY SELF == %@",category.name]];
     
     NSLog(@"%@",self.categories);
     
@@ -184,14 +185,9 @@
 
 
 
-
-
-
-
-
-
-
-
+- (void) newMapPoint:(MKMapItem *)mapPoint{
+    self.mapPoint = mapPoint;
+}
 
 
 @end

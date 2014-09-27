@@ -10,6 +10,7 @@
 #import "EWEDatasource.h"
 #import "EWESpot.h"
 #import "EWECategory.h"
+#import "EWEAddSpotViewController.h"
 #import <QuartzCore/QuartzCore.h>
 
 @interface EWECategoryTableViewController () <UITableViewDataSource, UITableViewDelegate> {

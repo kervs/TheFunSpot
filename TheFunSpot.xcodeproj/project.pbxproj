@@ -14,6 +14,7 @@
 		3B753AF119C10AB300710FE1 /* EWEDatasource.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B753AF019C10AB300710FE1 /* EWEDatasource.m */; };
 		3B753AF619C8B04300710FE1 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B753AF519C8B04300710FE1 /* CoreLocation.framework */; };
 		3B753AF919CCA7D600710FE1 /* NSString+StringUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B753AF819CCA7D600710FE1 /* NSString+StringUtilities.m */; };
+		3B9D974419D6769700618C64 /* EWEAddSpotViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B9D974319D6769700618C64 /* EWEAddSpotViewController.m */; };
 		3B9FD1F319BE488E00C88617 /* EWESearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B9FD1F219BE488E00C88617 /* EWESearchViewController.m */; };
 		3B9FD1F619BE718000C88617 /* EWECategoryTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B9FD1F519BE718000C88617 /* EWECategoryTableViewController.m */; };
 		3BC4E2AA19B901370041F576 /* EWEMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BC4E2A919B901370041F576 /* EWEMapViewController.m */; };
@@ -54,6 +55,8 @@
 		3B753AF519C8B04300710FE1 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		3B753AF719CCA7D600710FE1 /* NSString+StringUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+StringUtilities.h"; sourceTree = "<group>"; };
 		3B753AF819CCA7D600710FE1 /* NSString+StringUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+StringUtilities.m"; sourceTree = "<group>"; };
+		3B9D974219D6769700618C64 /* EWEAddSpotViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EWEAddSpotViewController.h; sourceTree = "<group>"; };
+		3B9D974319D6769700618C64 /* EWEAddSpotViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EWEAddSpotViewController.m; sourceTree = "<group>"; };
 		3B9FD1F119BE488E00C88617 /* EWESearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EWESearchViewController.h; sourceTree = "<group>"; };
 		3B9FD1F219BE488E00C88617 /* EWESearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EWESearchViewController.m; sourceTree = "<group>"; };
 		3B9FD1F419BE718000C88617 /* EWECategoryTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EWECategoryTableViewController.h; sourceTree = "<group>"; };
@@ -126,6 +129,8 @@
 				3B9FD1F219BE488E00C88617 /* EWESearchViewController.m */,
 				3B9FD1F419BE718000C88617 /* EWECategoryTableViewController.h */,
 				3B9FD1F519BE718000C88617 /* EWECategoryTableViewController.m */,
+				3B9D974219D6769700618C64 /* EWEAddSpotViewController.h */,
+				3B9D974319D6769700618C64 /* EWEAddSpotViewController.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -310,6 +315,7 @@
 				3B753AF919CCA7D600710FE1 /* NSString+StringUtilities.m in Sources */,
 				3B6A0D6219B8122A006B3692 /* EWEMainViewController.m in Sources */,
 				3B9FD1F619BE718000C88617 /* EWECategoryTableViewController.m in Sources */,
+				3B9D974419D6769700618C64 /* EWEAddSpotViewController.m in Sources */,
 				3BD8405E19B76D9D0039B72A /* main.m in Sources */,
 				3B9FD1F319BE488E00C88617 /* EWESearchViewController.m in Sources */,
 				3BC4E2AA19B901370041F576 /* EWEMapViewController.m in Sources */,

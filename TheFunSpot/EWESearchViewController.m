@@ -21,6 +21,7 @@
 @property (nonatomic, strong)UISearchDisplayController *searchBarController;
 @property (nonatomic, strong)UITableView *tableView;
 @property (nonatomic, strong)NSMutableArray *placesNear;
+@property (nonatomic, strong)NSArray *cacheSpot;
 
 
 @end
@@ -44,7 +45,7 @@
     // Do any additional setup after loading the view.
     self.placesNear = [[NSMutableArray  alloc]init];
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cell"];
-
+    self.cacheSpot = [EWEDatasource sharedInstance].spotAdded;
     self.searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, 320, 64)];
     self.searchBar.showsCancelButton = YES;
     self.searchBar.keyboardType = UIKeyboardTypeURL;
@@ -60,6 +61,15 @@
     [self.view addSubview:self.searchBar];
 }
 
+-(void) searchThroughChacheData{
+    
+        NSMutableArray *temp = [[NSMutableArray alloc]initWithArray:[EWEDatasource sharedInstance].spotAdded];
+        
+        self.cacheSpot = [temp filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"spotName contains  %@",self.searchBar.text]];
+        [self.tableView reloadData];
+    
+
+}
 
 - (void) searchTableList {
     
@@ -77,8 +87,10 @@
             NSLog(@"Map Items: %@, Placemark title: %f", mapItem.name,[[mapItem placemark]coordinate].latitude);
             [self.placesNear addObject:mapItem];
         }
+        
         [self.tableView reloadData];
-      
+        
+        
         
     }];
     
@@ -93,11 +105,14 @@
     if([searchText length] != 0) {
         isSearching = YES;
         [self searchTableList];
+        [self searchThroughChacheData];
+        
+        
     }
     else {
         isSearching = NO;
     }
-     //[self.tableView reloadData];
+    //[self.tableView reloadData];
 }
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
     isSearching = YES;
@@ -122,43 +137,85 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     // Return the number of sections.
-    return 1;
+    return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if (isSearching) {
-        return self.placesNear.count;
-    } else {
-        return self.placesNear.count;
+    if (section == 0)
+    {   return self.cacheSpot.count;
+        if (isSearching){
+            return self.cacheSpot.count;
+        }
     }
+    if (section == 1)
+    {
+        if (isSearching)
+            return self.placesNear.count;
+        
+    }
+    return 0;
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    
+    if(section == 0)
+    {
+        return @"FunSpots";
+    }
+    if(section == 1)
+    {
+        return @"Google result";
+    } else
+        return @"";
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
-    if(isSearching){
-        MKMapItem *mapItem = [self.placesNear objectAtIndex:indexPath.row];
-        [cell.textLabel setText:mapItem.name];
-        cell.accessoryType = UITableViewCellAccessoryCheckmark;
+    if (indexPath.section==0) {
+        EWESpot *spot = [self.cacheSpot objectAtIndex:indexPath.row];
+        
+        cell.textLabel.text = spot.spotName;
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
-    else
-    {
-        MKMapItem *mapItem = [self.placesNear objectAtIndex:indexPath.row];
-        [cell.textLabel setText:mapItem.name];
+    else {
+        
+        
+        if(isSearching){
+            if (indexPath.section == 0) {
+                EWESpot *spot = [self.cacheSpot objectAtIndex:indexPath.row];
+                
+                cell.textLabel.text = spot.spotName;
+                cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+            } else{
+                MKMapItem *mapItem = [self.placesNear objectAtIndex:indexPath.row];
+                [cell.textLabel setText:mapItem.name];
+                cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+            }
+        }
+        
+        
         
     }
     return cell;
 }
 
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.section == 0) {
+        
+    } else {
+        
+    }
 }
-*/
+/*
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end
