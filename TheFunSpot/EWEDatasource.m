@@ -19,6 +19,7 @@
 @property (nonatomic, assign)CLLocation *currentCoord;
 @property (nonatomic, retain)CLLocationManager *locationManger;
 @property (nonatomic,strong)MKMapItem *mapPoint;
+@property (nonatomic, strong)EWECategory *selectedCat;
 @end
 
 @implementation EWEDatasource
@@ -163,8 +164,8 @@
     
 }
 
-- (EWESpot *) addSpotName:(NSString *)name addSpotnote:(NSString *)note andLocation:(CLLocationCoordinate2D)location {
-    EWESpot *newSpot = [[EWESpot alloc]initWithSpotName:name spotNote:note andLocation:location];
+- (EWESpot *) addSpotName:(NSString *)name addSpotnote:(NSString *)note andLocation:(CLLocationCoordinate2D)location andCategory:(EWECategory *)category {
+    EWESpot *newSpot = [[EWESpot alloc]initWithSpotName:name spotNote:note andLocation:location andCategory:category];
     
     NSMutableArray *temp = [[NSMutableArray alloc]initWithArray:self.spotAdded];
     
@@ -178,15 +179,20 @@
 
 -(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations{
     
-    
     self.currentCoord = [locations lastObject];
     
 }
 
-
+- (void) addNewCatForSpot: (EWECategory *)category {
+    
+    self.selectedCat = category;
+    NSLog(@"%@",self.selectedCat.name);
+    
+}
 
 - (void) newMapPoint:(MKMapItem *)mapPoint{
     self.mapPoint = mapPoint;
+    NSLog(@"%@",self.mapPoint.name);
 }
 
 

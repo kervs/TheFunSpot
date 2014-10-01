@@ -18,7 +18,7 @@
 @property (nonatomic,strong) NSString *note;
 @property (nonatomic,assign) BOOL visited;
 
-- (instancetype)initWithSpotName:(NSString *)name spotNote:(NSString *)note andLocation:(CLLocationCoordinate2D) location;
+- (instancetype)initWithSpotName:(NSString *)name spotNote:(NSString *)note andLocation:(CLLocationCoordinate2D) location andCategory:(EWECategory *)category;
 
 
 @end

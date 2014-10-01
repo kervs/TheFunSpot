@@ -17,8 +17,10 @@
 @property (nonatomic,strong,readonly) NSArray *categories;
 @property (nonatomic, readonly) CLLocation *currentCoord;
 @property (nonatomic,strong,readonly)MKMapItem *mapPoint;
+@property (nonatomic, strong,readonly)EWECategory *selectedCat;
 - (EWECategory *) addNewCategory:(NSString *)name andColor:(UIColor *)color;
-- (EWESpot *) addSpotName:(NSString *)name addSpotnote:(NSString *)note andLocation:(CLLocationCoordinate2D)location;
+- (EWESpot *) addSpotName:(NSString *)name addSpotnote:(NSString *)note andLocation:(CLLocationCoordinate2D)location andCategory:(EWECategory *)category;
 - (void) delCategory:(EWECategory *)category;
 - (void) newMapPoint:(MKMapItem *)mapPoint;
+- (void) addNewCatForSpot: (EWECategory *)category;
 @end

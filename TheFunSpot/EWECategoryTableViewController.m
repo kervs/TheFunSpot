@@ -10,11 +10,11 @@
 #import "EWEDatasource.h"
 #import "EWESpot.h"
 #import "EWECategory.h"
-#import "EWEAddSpotViewController.h"
 #import <QuartzCore/QuartzCore.h>
 
 @interface EWECategoryTableViewController () <UITableViewDataSource, UITableViewDelegate> {
     BOOL addingCategory;
+    EWECategoryTableViewStyle style;
 }
 
 @property (nonatomic, strong) UITableView *tableView;
@@ -28,9 +28,10 @@
 @implementation EWECategoryTableViewController
 
 
-- (instancetype) init {
+- (instancetype) initWithStyle:(EWECategoryTableViewStyle)aStyle {
     self = [super init];
     if (self) {
+        style = aStyle;
         [self relodArray];
     }
     return self;
@@ -78,9 +79,6 @@
     if ( [self.view hitTest:location withEvent:event])  {
             [self dismissViewControllerAnimated:YES completion:nil];
                }
-    
-    
-    
     
 }
 
@@ -192,7 +190,7 @@
         cell.backgroundColor = category.color;
         [cell.textLabel setText:category.name];
         // if this category is selected
-        cell.accessoryType = UITableViewCellAccessoryCheckmark;
+        cell.accessoryType = UITableViewCellAccessoryNone;
         // else nothing
     }
     return cell;
@@ -252,7 +250,16 @@
            }
 }
 
-
+- (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+    if (style == EWECategoryTableViewStyleSingleChoice) {
+        [[EWEDatasource sharedInstance] addNewCatForSpot:[self.categories objectAtIndex:indexPath.row]];
+        cell.accessoryType = UITableViewCellAccessoryCheckmark;
+        [self dismissViewControllerAnimated:YES completion:nil];
+    } else {
+        return;
+    }
+}
 /*
 // Override to support rearranging the table view.
 - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {

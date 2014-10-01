@@ -11,8 +11,19 @@
 @class EWECategoryTableViewController;
 @class EWECategory;
 
+@protocol EWECategoryTableViewControllerDelegate <NSObject>
+@optional
+- (void)EWECategoryTableViewController:(EWECategoryTableViewController *)controller didSelectCategory:(EWECategory *)category;
+- (void)EWECategoryTableViewController:(EWECategoryTableViewController *)controller didDeselectCategory:(EWECategory *)category;
+@end
 
+typedef NS_ENUM(NSUInteger, EWECategoryTableViewStyle) {
+    EWECategoryTableViewStyleMultiChoice,
+    EWECategoryTableViewStyleSingleChoice
+};
 
 @interface EWECategoryTableViewController : UIViewController
+
+-(instancetype) initWithStyle:(EWECategoryTableViewStyle)aStyle;
 
 @end

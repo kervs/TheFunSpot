@@ -10,13 +10,14 @@
 
 @implementation EWESpot
 
-- (instancetype)initWithSpotName:(NSString *)name spotNote:(NSString *)note andLocation:(CLLocationCoordinate2D) location{
+- (instancetype)initWithSpotName:(NSString *)name spotNote:(NSString *)note andLocation:(CLLocationCoordinate2D) location andCategory:(EWECategory *)category {
     self = [super init];
     if (self) {
         self.spotName = name;
         self.note = note;
         self.location = location;
         self.visited = NO;
+        self.category = category;
         
     }
     return self;

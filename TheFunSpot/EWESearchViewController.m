@@ -9,6 +9,7 @@
 #import "EWESearchViewController.h"
 #import "EWEMapViewController.h"
 #import "EWEDatasource.h"
+#import "EWEAddSpotViewController.h"
 #import <MapKit/MapKit.h>
 
 @interface EWESearchViewController () <UISearchBarDelegate, UITableViewDataSource, UITableViewDelegate> {
@@ -206,6 +207,9 @@
         
     } else {
         
+        [[EWEDatasource sharedInstance] newMapPoint:[self.placesNear objectAtIndex:indexPath.row]];
+        EWEAddSpotViewController *addWindow = [[EWEAddSpotViewController alloc]init];
+        [self presentViewController:addWindow animated:NO completion:nil];
     }
 }
 /*
