@@ -15,6 +15,7 @@
 		3B753AF619C8B04300710FE1 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B753AF519C8B04300710FE1 /* CoreLocation.framework */; };
 		3B753AF919CCA7D600710FE1 /* NSString+StringUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B753AF819CCA7D600710FE1 /* NSString+StringUtilities.m */; };
 		3B9D974419D6769700618C64 /* EWEAddSpotViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B9D974319D6769700618C64 /* EWEAddSpotViewController.m */; };
+		3B9D974719DCFF3100618C64 /* EWECustomCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B9D974619DCFF3000618C64 /* EWECustomCell.m */; };
 		3B9FD1F319BE488E00C88617 /* EWESearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B9FD1F219BE488E00C88617 /* EWESearchViewController.m */; };
 		3B9FD1F619BE718000C88617 /* EWECategoryTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B9FD1F519BE718000C88617 /* EWECategoryTableViewController.m */; };
 		3BC4E2AA19B901370041F576 /* EWEMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BC4E2A919B901370041F576 /* EWEMapViewController.m */; };
@@ -57,6 +58,8 @@
 		3B753AF819CCA7D600710FE1 /* NSString+StringUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+StringUtilities.m"; sourceTree = "<group>"; };
 		3B9D974219D6769700618C64 /* EWEAddSpotViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EWEAddSpotViewController.h; sourceTree = "<group>"; };
 		3B9D974319D6769700618C64 /* EWEAddSpotViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EWEAddSpotViewController.m; sourceTree = "<group>"; };
+		3B9D974519DCFF3000618C64 /* EWECustomCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EWECustomCell.h; sourceTree = "<group>"; };
+		3B9D974619DCFF3000618C64 /* EWECustomCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EWECustomCell.m; sourceTree = "<group>"; };
 		3B9FD1F119BE488E00C88617 /* EWESearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EWESearchViewController.h; sourceTree = "<group>"; };
 		3B9FD1F219BE488E00C88617 /* EWESearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EWESearchViewController.m; sourceTree = "<group>"; };
 		3B9FD1F419BE718000C88617 /* EWECategoryTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EWECategoryTableViewController.h; sourceTree = "<group>"; };
@@ -131,6 +134,8 @@
 				3B9FD1F519BE718000C88617 /* EWECategoryTableViewController.m */,
 				3B9D974219D6769700618C64 /* EWEAddSpotViewController.h */,
 				3B9D974319D6769700618C64 /* EWEAddSpotViewController.m */,
+				3B9D974519DCFF3000618C64 /* EWECustomCell.h */,
+				3B9D974619DCFF3000618C64 /* EWECustomCell.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -319,6 +324,7 @@
 				3BD8405E19B76D9D0039B72A /* main.m in Sources */,
 				3B9FD1F319BE488E00C88617 /* EWESearchViewController.m in Sources */,
 				3BC4E2AA19B901370041F576 /* EWEMapViewController.m in Sources */,
+				3B9D974719DCFF3100618C64 /* EWECustomCell.m in Sources */,
 				3B753AEB19C0BAC600710FE1 /* EWECategory.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

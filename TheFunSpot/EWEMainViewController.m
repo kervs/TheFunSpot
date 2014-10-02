@@ -13,6 +13,7 @@
 #import "EWEDatasource.h"
 #import "EWESpot.h"
 #import "EWECategory.h"
+#import "EWECustomCell.h"
 
 @interface EWEMainViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -66,7 +67,7 @@
     [super viewDidLoad];
     CGFloat width = self.view.frame.size.width;
     // Do any additional setup after loading the view.
-    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cell"];
+    [self.tableView registerClass:[EWECustomCell class] forCellReuseIdentifier:@"cell"];
     
     
     self.mapButton = [[UIButton alloc]initWithFrame:CGRectMake(20, 30, 20, 20)];
@@ -163,25 +164,28 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     EWESpot *spot = [self.names objectAtIndex:indexPath.row];
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+    EWECustomCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+    cell.spot = spot;
     
-  
 
     // Configure the cell...
     
-    [cell.textLabel setText:spot.spotName];
-    [cell.detailTextLabel setText:spot.note];
+//    [cell.textLabel setText:spot.spotName];
+//    [cell.detailTextLabel setText:spot.note];
     // if this category is selected
-     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+//     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     // else nothing
     return cell;
 }
 
--(void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     EWEMapViewController *mapView = [[EWEMapViewController alloc]init];
     [self presentViewController:mapView animated:YES completion:nil];
-    
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 100;
 }
 
 /*
