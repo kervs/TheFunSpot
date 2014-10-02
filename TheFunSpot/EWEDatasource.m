@@ -57,6 +57,7 @@
         
         
         
+        
     }
     return self;
 }
@@ -192,7 +193,7 @@
 
 - (void) newMapPoint:(MKMapItem *)mapPoint{
     self.mapPoint = mapPoint;
-    NSLog(@"%@",self.mapPoint.name);
+    NSLog(@"%f, %f",self.mapPoint.placemark.location.coordinate.latitude, self.mapPoint.placemark.location.coordinate.longitude);
 }
 
 

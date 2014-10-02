@@ -12,16 +12,18 @@
 #import "EWEDatasource.h"
 #import "EWESpot.h"
 #import "EWECategory.h"
+#import <CoreLocation/CoreLocation.h>
 
 
-@interface EWEMapViewController () <MKMapViewDelegate>
+@interface EWEMapViewController () <MKMapViewDelegate, CLLocationManagerDelegate>
 @property (nonatomic, strong)UINavigationBar *navBar;
 @property (nonatomic, strong)MKMapView *mapView;
 @property (nonatomic, strong)UIButton *searchButton;
 @property (nonatomic, strong)UIButton *categoryButton;
 @property (nonatomic, strong)UIButton *listButton;
+@property (nonatomic, strong)CLLocationManager *locationManager;
+@property (nonatomic, strong) NSMutableArray *listOfRegions;
 
-@property (nonatomic, strong)UILongPressGestureRecognizer *longPress;
 @property (nonatomic, strong)EWEDatasource *dataSource;
 
 
@@ -56,14 +58,38 @@
 
 -(void)viewDidLoad{
     [super viewDidLoad];
+   
+    self.locationManager = [CLLocationManager new];
+    self.locationManager.delegate = self;
+    self.locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation;
+    self.locationManager.distanceFilter = kCLLocationAccuracyHundredMeters;
+    
+    self.listOfRegions = [NSMutableArray array];
+    if ([CLLocationManager locationServicesEnabled]) {
+        for (EWESpot *spot in [EWEDatasource sharedInstance].spotAdded) {
+            CLCircularRegion *region = [[CLCircularRegion alloc] initWithCenter:spot.location radius:200.0 identifier:spot.spotName];
+            [self.listOfRegions addObject:region];
+        }
+        for (int i; i < self.listOfRegions.count; i++) {
+            [self.locationManager startMonitoringForRegion:self.listOfRegions[i]];
+        }
+    }
+    NSLog(@"regions %@",[self.locationManager monitoredRegions]);
+}
+
+- (void)locationManager:(CLLocationManager *)manager didEnterRegion:(CLRegion *)region {
+    NSLog(@"you are here ");
     
 }
+
 
 - (void)viewWillLayoutSubviews
 {
     [super viewWillLayoutSubviews];
     // Do any additional setup after loading the view.
     CGFloat width = self.view.frame.size.width;
+    
+    
 
     self.mapView = [[MKMapView alloc]initWithFrame:CGRectMake(0, 64, width, self.view.bounds.size.height - 64)];
     self.mapView.delegate = self;
@@ -73,9 +99,6 @@
     self.mapView.showsUserLocation = YES;
     [self.view addSubview:self.mapView];
     
-    self.longPress = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(handleLongPress:)];
-    self.longPress.minimumPressDuration = 2.0;
-    [self.mapView addGestureRecognizer:self.longPress];
     
     
     self.listButton = [[UIButton alloc]initWithFrame:CGRectMake(20, 30, 30, 20)];
@@ -113,21 +136,7 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-//- (void)handleLongPress:(UIGestureRecognizer *)gestureRecognizer
-//{
-//    if (gestureRecognizer.state != UIGestureRecognizerStateBegan)
-//        return;
-//   
-//   
-//    CGPoint touchPoint = [gestureRecognizer locationInView:self.mapView];
-//   
-//    self.newLocation = [self.mapView convertPoint:touchPoint toCoordinateFromView:self.mapView];
-//    
-//    //        self.listOfLocation = temp;
-//        
-//    }];
-//
-//}
+
 
 //- (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation
 //{
