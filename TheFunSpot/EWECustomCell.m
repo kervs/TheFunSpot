@@ -52,6 +52,8 @@ static UIFont *boldFont;
     return mutableSpotName;
 }
 
+
+
 - (NSAttributedString *)descriptionLabelString {
     
     NSString *baseString = [NSString stringWithFormat:@"%@",self.spot.note];
@@ -73,13 +75,13 @@ static UIFont *boldFont;
     
     self.imageview.frame = CGRectMake(20, 20, 30, 30);
     
-    self.distanceLabel.frame = CGRectMake(20, 40, 40, 30);
+    self.distanceLabel.frame = CGRectMake(20, 50, 30, 30);
     
     CGSize sizeNameLabel = [self sizeOfString:self.nameLabel.attributedText];
-    self.nameLabel.frame = CGRectMake(60, 20, CGRectGetWidth(self.contentView.bounds) - 40, sizeNameLabel.height);
+    self.nameLabel.frame = CGRectMake(60, 15, CGRectGetWidth(self.contentView.bounds) - 40, sizeNameLabel.height - 10);
     
     CGSize sizeOfDescriptionLabel = [self sizeOfString:self.descriptionLabel.attributedText];
-    self.descriptionLabel.frame = CGRectMake(60, CGRectGetMaxY(self.nameLabel.frame), CGRectGetWidth(self.bounds), sizeOfDescriptionLabel.height);
+    self.descriptionLabel.frame = CGRectMake(60, CGRectGetMaxY(self.nameLabel.frame), 250, sizeOfDescriptionLabel.height);
     
 }
 
@@ -89,6 +91,7 @@ static UIFont *boldFont;
     self.nameLabel.attributedText = [self nameLabelString];
     self.descriptionLabel.attributedText = [self descriptionLabelString];
     self.distanceLabel.text = @"<.1 mi";
+    self.distanceLabel.font = [UIFont fontWithName:@"HelveticaNeue-Thin" size:11];
 }
 
 

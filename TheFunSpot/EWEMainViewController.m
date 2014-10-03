@@ -170,10 +170,7 @@
 
     // Configure the cell...
     
-//    [cell.textLabel setText:spot.spotName];
-//    [cell.detailTextLabel setText:spot.note];
-    // if this category is selected
-//     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     // else nothing
     return cell;
 }
