@@ -71,15 +71,15 @@ static UIFont *boldFont;
     [super layoutSubviews];
     
     
-    self.imageview.frame = CGRectMake(20, 20, 20, 20);
+    self.imageview.frame = CGRectMake(20, 20, 30, 30);
     
-    self.distanceLabel.frame = CGRectMake(20, 25, 30 , 30);
+    self.distanceLabel.frame = CGRectMake(20, 40, 40, 30);
     
     CGSize sizeNameLabel = [self sizeOfString:self.nameLabel.attributedText];
-    self.nameLabel.frame = CGRectMake(40, 20, CGRectGetWidth(self.contentView.bounds) - 40, sizeNameLabel.height);
+    self.nameLabel.frame = CGRectMake(60, 20, CGRectGetWidth(self.contentView.bounds) - 40, sizeNameLabel.height);
     
     CGSize sizeOfDescriptionLabel = [self sizeOfString:self.descriptionLabel.attributedText];
-    self.descriptionLabel.frame = CGRectMake(40, CGRectGetMaxY(self.nameLabel.frame), CGRectGetWidth(self.bounds), sizeOfDescriptionLabel.height);
+    self.descriptionLabel.frame = CGRectMake(60, CGRectGetMaxY(self.nameLabel.frame), CGRectGetWidth(self.bounds), sizeOfDescriptionLabel.height);
     
 }
 
@@ -88,7 +88,7 @@ static UIFont *boldFont;
     self.imageview.image = [UIImage imageNamed:@"red"];
     self.nameLabel.attributedText = [self nameLabelString];
     self.descriptionLabel.attributedText = [self descriptionLabelString];
-    self.distanceLabel.text = @"< .1 mi";
+    self.distanceLabel.text = @"<.1 mi";
 }
 
 
